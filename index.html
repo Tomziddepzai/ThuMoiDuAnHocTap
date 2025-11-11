@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Thư Mời Tham Dự Sự Kiện</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat', Arial, sans-serif;
+      background: linear-gradient(120deg,#ede6de 0%,#c6b2e4 65%,#eedfc0 100%) fixed;
+      background-image:
+        radial-gradient(circle at 12% 8%, #f1e1bb88 0%, transparent 70%),
+        radial-gradient(circle at 76% 9%, #ecd4ef99 0%, transparent 72%),
+        radial-gradient(ellipse at 90% 95%, #e9dfbd60 0%, transparent 80%),
+        linear-gradient(115deg,#cbc7edb7 13%, #e9e1f8 67%, #fcf3c6 100%),
+        linear-gradient(90deg,#d6cafb 0%,#efe4b7 100%);
+      background-blend-mode: lighten, lighten, lighten, normal, normal;
+      overflow-x: hidden;
+    }
+    .school-logo {
+      position: fixed;
+      top: 18px;
+      left: 18px;
+      z-index: 20;
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.92);
+      box-shadow: 0 4px 22px 3px #b7a86540, 0 0 0 5px #efe3bc;
+      border: 2.5px solid #dcc397bb;
+      padding: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: fadeInLogo 1.1s;
+      transition: box-shadow .28s;
+    }
+    @keyframes fadeInLogo {
+      from { opacity: 0; transform: translateY(-22px) scale(0.86);}
+      to   { opacity: 1; transform: none;}
+    }
+    .school-logo img {
+      width: 100%; height: 100%;
+      object-fit: contain;
+      border-radius: 50%;
+      display: block;
+      transition: filter .23s;
+      filter: drop-shadow(0 1.5px 6px #e5d6b7) brightness(1.05);
+    }
+    .school-logo:hover img {
+      filter: drop-shadow(0 4px 12px #eadfc7) brightness(1.13);
+    }
+    .rain-container {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .rain-emoji {
+      position: absolute;
+      opacity: 0;
+      user-select: none;
+      text-shadow: 0 2px 14px #bba78230, 0 0 7px #f7dfaab8;
+      filter:
+        blur(1.1px)
+        drop-shadow(0 2px 8px #d7c09c8a)
+        drop-shadow(0 0 8px #c9a4ed71);
+      animation: rain-fall cubic-bezier(.38,.17,.38,1.13) forwards;
+      will-change: transform, opacity;
+    }
+    .rain-emoji.rain-pencil {
+      color: #b880a9;
+      text-shadow: 0 0 8px #e6bee6, 0 2px 15px #ecd3a6ba;
+    }
+    .rain-emoji.rain-books {
+      color: #7ab6cf;
+      text-shadow: 0 0 10px #c7e9d47f, 0 2px 15px #bac1fa98;
+    }
+    .rain-emoji.rain-book {
+      color: #ae9e68;
+      text-shadow: 0 0 10px #ffecc6;
+    }
+    @keyframes rain-fall {
+      0%    {opacity: 0; transform: translateY(-15vh) scale(1.14) rotate(-16deg);}
+      12%   {opacity: 0.92;}
+      27%   {opacity: 1;}
+      93%   {opacity: 1;}
+      98%   {opacity: 0.35;}
+      100%  {opacity: 0; transform: translateY(117vh) scale(1.18) rotate(13deg);}
+    }
+    .invitation {
+      max-width: 480px;
+      width: 95vw;
+      background: linear-gradient(120deg,#f5ede5e8 78%,#e7e0fae5 100%);
+      border-radius: 2.5em;
+      box-shadow:
+        0 13px 52px 6px #b19f68a5,
+        0 0px 0 2.5px #f1ecdac9 inset;
+      border: 3px solid #c8b89eee;
+      outline: 2px solid #d3cfeb5c;
+      margin: 75px auto 75px auto;
+      padding: 55px 36px 36px 36px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      backdrop-filter: blur(8px) brightness(1.09);
+      -webkit-backdrop-filter: blur(8px) brightness(1.09);
+      background-clip: padding-box;
+      animation: float-glow 5s ease-in-out infinite alternate;
+      transition: box-shadow .22s;
+    }
+    @keyframes float-glow {
+      from { box-shadow: 0 13px 52px 6px #bba78236, 0 0px 0 2.5px #cbc7efb7 inset;}
+      to   { box-shadow: 0 8px 38px 7px #a3ad688a, 0 0px 0 1.7px #f9f2e4a5 inset;}
+    }
+    .emoji {
+      font-size: 2.7em;
+      margin-bottom: 12px;
+      display: inline-block;
+      animation: emoji-bounce 1.45s infinite alternate cubic-bezier(.6,.1,.4,1);
+      text-shadow: 0 3px 18px #efe3b7a0,0 1.5px 1px #c8e4f8cb;
+    }
+    @keyframes emoji-bounce {
+      from { transform: translateY(0);}
+      to { transform: translateY(-14px) scale(1.08);}
+    }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 2.26em;
+      letter-spacing: 1.8px;
+      margin: 0 0 4px 0;
+      background: linear-gradient(92deg, #baa876 18%, #a778e6 74%, #f9e7bc 99%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      position: relative;
+      text-shadow: 0 2px 22px #e5d49c82;
+    }
+    h1:after {
+      content: "";
+      display: block;
+      height: 5px;
+      width: 56%;
+      margin: 14px auto 0 auto;
+      border-radius: 3px;
+      background: linear-gradient(90deg,#dec28a,#bbaaef,#e6d698 100%);
+      animation: shimmer 2.4s linear infinite;
+      opacity: .73;
+    }
+    @keyframes shimmer {
+      0% {background-position: -150px;}
+      100% {background-position: 300px;}
+    }
+    .school {
+      font-size: 1.16em;
+      font-weight: 500;
+      color: #b79555;
+      margin: 13px 0 19px 0;
+      letter-spacing: .8px;
+      text-shadow: 0 2px 8px #ebe9cb76;
+    }
+    .topic {
+      font-size: 1.11em;
+      margin: 14px 0 22px 0;
+      font-style: italic;
+      color: #9480bd;
+      font-weight: 500;
+      text-shadow: 0 1.5px 12px #d7c9fa72;
+    }
+    .section-title {
+      margin-top: 21px;
+      margin-bottom: 2px;
+      color: #ad8d49;
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      text-align: left;
+      font-size: 1.18em;
+      letter-spacing: .30px;
+      text-shadow: 0 1px 7px #dfd8b19b;
+    }
+    .details {
+      color: #a19270;
+      margin: 6px 0 10px 0;
+      font-size: 1.05em;
+      text-align: left;
+      padding-left: 19px;
+      font-weight: 500;
+      letter-spacing: .02em;
+    }
+    hr {
+      border: none;
+      border-top: 2px dashed #ccb48d76;
+      margin: 22px 0 19px 0;
+      opacity: .43;
+    }
+    .desc {
+      margin-top: 18px;
+      line-height: 1.78;
+      background: linear-gradient(99deg, #efe2c4 69%, #d2c8e8 100%);
+      box-shadow: 0 2.5px 19px #baa78232;
+      border-radius: .92em;
+      color: #968973;
+      font-size: 1.09em;
+      text-align: left;
+      padding: 15px 19px 12px 25px;
+      border-left: 3.5px solid #c1b8ebc5;
+      font-weight: 400;
+      text-shadow: 0 1px 4px #edda967a;
+    }
+    .desc ul {
+      margin:10px 0 0 0; padding-left:18px;
+    }
+    .desc li {
+      margin-bottom: 4px;
+    }
+    .rsvp-btn {
+      margin-top: 32px;
+      background: linear-gradient(92deg, #ccbfa7 0%, #b8adda 110%);
+      color: #805b21;
+      padding: 14px 44px;
+      border: none;
+      border-radius: 22px;
+      font-size: 1.17em;
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-weight: 700;
+      box-shadow: 0 4px 27px #ceb77654, 0 1.7px 0 #fff7ee inset;
+      letter-spacing: .14em;
+      cursor: pointer;
+      transition: background 0.19s, color .12s, transform .13s;
+      position: relative;
+      overflow: hidden;
+      animation: pulse 1.9s infinite alternate;
+    }
+    .rsvp-btn:hover, .rsvp-btn:focus {
+      background: linear-gradient(90deg, #fff5df 20%, #b5b6e3 100%);
+      color:#675217;
+      transform: scale(1.06);
+      box-shadow: 0 17px 36px #dac693a1;
+    }
+    .rsvp-btn:active {
+      outline: 2px solid #dfcd9c75;
+    }
+    .rsvp-btn .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(221,201,151,0.19);
+      animation: ripple 0.55s linear;
+      pointer-events: none;
+      transform: scale(0);
+      z-index: 2;
+    }
+    @keyframes ripple {
+      to { transform: scale(7); opacity: 0;}
+    }
+    @keyframes pulse {
+      from { box-shadow: 0 0 0 0 #ceb8766d; }
+      to   { box-shadow: 0 0 23px 10px #d7c098c0; }
+    }
+    .footer {
+      margin-top: 23px;
+      color: #b9a667;
+      font-size: 1.03em;
+      font-style: italic;
+      font-weight: 500;
+      text-shadow: 0 1px 14px #d1c3958f;
+    }
+
+    /* --- Thank You Modal Board (27, slightly darker) --- */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 100000;
+      background: rgba(85, 66, 70, 0.18);
+      backdrop-filter: blur(2.7px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: fadeInModalBg 0.35s;
+    }
+    @keyframes fadeInModalBg {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .modal-board,
+    .modal-board * {
+      font-family: Arial, Helvetica, sans-serif !important;
+    }
+    .modal-board {
+      background: linear-gradient(120deg, #ebe1ce 72%, #e4d6fc 100%);
+      padding: 38px 34px 32px 34px;
+      border-radius: 33px;
+      box-shadow: 0 9px 48px #b6a47ea6, 0 1px 0 #dad2c7 inset;
+      border: 2.5px solid #c3b394cb;
+      max-width: 95vw;
+      width: 350px;
+      text-align: center;
+      position: relative;
+      animation: modalAppear 0.38s cubic-bezier(.1,1.2,.37,.98);
+    }
+    @keyframes modalAppear {
+      from { opacity: 0; transform: translateY(54px) scale(.92);}
+      80%  { transform: scale(1.06);}
+      to   { opacity: 1; transform: none;}
+    }
+    .modal-board .close-btn {
+      position: absolute;
+      top: 13px; right: 16px;
+      font-size: 1.57em;
+      color: #a08055;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      outline: none;
+      padding: 4px 9px 2px 9px;
+      border-radius: 11px;
+      transition: background .17s;
+    }
+    .modal-board .close-btn:hover, .modal-board .close-btn:focus {
+      background: #ede4cd;
+      color: #7b643b;
+    }
+    .modal-thanks-title {
+      font-size: 1.48em;
+      background: linear-gradient(90deg, #bfa047 0%, #6b53a3 99%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      font-weight: 700;
+      margin-bottom: 7px;
+      margin-top: 17px;
+      letter-spacing: .5px;
+      text-shadow: 0 2px 12px #b4965e71;
+    }
+    .modal-thanks-msg {
+      color: #635869;
+      font-size: 1.11em;
+      margin-bottom: 14px;
+      margin-top: 18px;
+      font-weight: 500;
+      text-shadow: 0 2px 7px #ead5da70;
+    }
+    .modal-thanks-wish {
+      color: #a48a39;
+      font-size: 1.05em;
+      margin: 0 0 0 0;
+      line-height: 1.7;
+      font-style: italic;
+      letter-spacing: 0.04em;
+    }
+    .modal-board::before {
+      content: "";
+      pointer-events: none;
+      position: absolute;
+      left: -19%;
+      top: -28%;
+      width: 67%;
+      height: 195%;
+      background: linear-gradient(120deg,rgba(255,255,255,0.0) 38%,rgba(255,255,255,0.12) 67%,rgba(255,255,255,0.02) 100%);
+      filter: blur(3.5px);
+      transform: skewX(-14deg);
+      opacity: 0.54;
+      animation: modalShimmer 4.7s linear infinite;
+    }
+    @keyframes modalShimmer {
+      0% { left: -19%; opacity: .3;}
+      61% { left: 81%; opacity: .51;}
+      70% { opacity: 0.18;}
+      100% { left: 112%; opacity: 0;}
+    }
+    @media (max-width:540px) {
+      .school-logo {top:7px; left:7px; width:46px; height:46px; padding:2px;}
+      .invitation {margin: 23px 2vw 30px 2vw;max-width:99vw;padding:6vw 3vw;}
+      h1 { font-size: 1.19em;}
+      .desc {padding-left: 9px;}
+      .modal-board {padding: 3.7em 6vw 2.2em 6vw;}
+      .modal-board .close-btn {right: 13px;}
+    }
+  </style>
+</head>
+<body>
+  <div class="school-logo">
+    <img src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-ZVWw3tg3CJy7eWFAEXj4Zsol/user-OC4Ae8XjkYNIwPI0Mrn3R24b/img-NSw7Dk1oZEXJV1YjP9SZK1Oo.png" alt="Trường THPT Liên Bảo logo">
+  </div>
+  <div class="rain-container" id="rainContainer"></div>
+  <div class="invitation">
+    <div class="emoji">💌🌍</div>
+    <h1>THƯ MỜI THAM GIA DỰ ÁN HỌC TẬP</h1>
+    <div class="school">Trường THPT Liên Bảo</div>
+    <hr />
+    <div class="topic">
+      <b>Chủ đề:</b> DỰ ÁN LIÊN MÔN VĂN - NGOẠI NGỮ:<br>
+      <span style="color:#b79555;font-weight:bold;letter-spacing:1.1px">FROM WORDS TO WORLD</span>
+    </div>
+    <div class="section-title">⏰ Times:</div>
+    <div class="details">Thứ Ba, ngày 11 tháng 11 năm 2025<br>14 giờ 00 (14h00)</div>
+    <div class="section-title">📍 Location:</div>
+    <div class="details">Sân trường THPT Liên Bảo</div>
+    <hr />
+    <div class="desc">
+      <b>Dự án "FROM WORDS TO WORLD"</b> là sự kết hợp sáng tạo giữa hai môn học Ngữ Văn và Ngoại Ngữ, nhằm giúp học sinh:
+      <ul>
+        <li>Vận dụng kiến thức liên môn để tạo ra các sản phẩm truyền thông sáng tạo.</li>
+        <li>Nâng cao kỹ năng giao tiếp và trình bày bằng ngoại ngữ.</li>
+        <li>Mở rộng tầm nhìn, kết nối tri thức với thế giới thực tiễn.</li>
+      </ul>
+    </div>
+    <button class="rsvp-btn" id="rsvpBtn">Xác nhận tham dự</button>
+    <div class="footer">
+      Sự góp mặt của Quý Thầy Cô là nguồn động viên lớn để các em cố gắng học tập sáng tạo!
+    </div>
+  </div>
+  <!-- Modal Thank You Board (initially hidden) -->
+  <div id="modalOverlay" class="modal-overlay" style="display:none;">
+    <div class="modal-board" role="dialog" aria-modal="true" tabindex="-1">
+      <button class="close-btn" id="modalClose" aria-label="Đóng">&times;</button>
+      <div class="modal-thanks-title">Cảm ơn Thầy/Cô đã xác nhận!</div>
+      <div class="modal-thanks-msg">🎉 Chúc Thầy/Cô luôn mạnh khoẻ, hạnh phúc và thành công!<br><br> Sự hiện diện của Thầy/Cô là niềm vinh dự và là động lực lớn cho các em học sinh!</div>
+      <div class="modal-thanks-wish">Hẹn gặp Thầy/Cô tại sự kiện!</div>
+    </div>
+  </div>
+  <script>
+    // Fancy rain
+    const ICONS = [
+      { emoji: "📖",     class:"rain-book" },
+      { emoji: "✏️",    class:"rain-pencil" },
+      { emoji: "📚",    class:"rain-books" }
+    ];
+    function makeFancyRain() {
+      const colors = [
+        "#c2ad70", "#b3996a", "#e7c595", "#a489da", "#ffe382"
+      ];
+      const rain = document.getElementById('rainContainer');
+      const which = ICONS[Math.floor(Math.random()*ICONS.length)];
+      const drop = document.createElement('span');
+      drop.className = 'rain-emoji ' + which.class;
+      drop.textContent = which.emoji;
+      drop.style.left = (Math.random()*100) + "vw";
+      drop.style.fontSize = (1.19 + Math.random()*0.47) + "em";
+      drop.style.animationDuration = (4.3 + Math.random()*3.9) + "s";
+      drop.style.animationDelay = (Math.random()*1.23) + "s";
+      if (which.class === "rain-book") {
+        drop.style.color = colors[Math.floor(Math.random()*colors.length)];
+      }
+      drop.style.opacity = 0.21 + Math.random()*0.16;
+      drop.style.transform += ` rotate(${(-15 + Math.random()*29).toFixed(0)}deg)`;
+      rain.appendChild(drop);
+      setTimeout(() => drop.remove(), 8800);
+    }
+    for(let i=0;i<5;i++) setTimeout(makeFancyRain, i*570);
+    setInterval(makeFancyRain, 1400);
+
+    // RSVP button: show modal board
+    const modal = document.getElementById('modalOverlay');
+    const openBtn = document.getElementById('rsvpBtn');
+    const closeBtn = document.getElementById('modalClose');
+    openBtn.addEventListener('click', function(e){
+      // Ripple
+      let btn = e.target;
+      let rect = btn.getBoundingClientRect();
+      let ripple = document.createElement('span');
+      ripple.className = "ripple";
+      ripple.style.width = ripple.style.height = Math.max(rect.width, rect.height) + "px";
+      ripple.style.left = (e.clientX - rect.left - rect.width/2) + "px";
+      ripple.style.top = (e.clientY - rect.top - rect.height/2) + "px";
+      btn.appendChild(ripple);
+      setTimeout(()=>ripple.remove(), 600);
+
+      // Modal
+      setTimeout(()=>{
+        modal.style.display = "flex";
+        const dialog = modal.querySelector('.modal-board');
+        dialog.focus();
+      }, 170);
+    });
+    // Close modal
+    function closeModal() {
+      modal.style.display = "none";
+      openBtn.focus();
+    }
+    closeBtn.addEventListener('click', closeModal);
+    // Close on ESC and click outside modal box
+    window.addEventListener('keydown', function(e){
+      if(modal.style.display==="flex"&&(e.key==='Escape'||e.key==='Esc')) closeModal();
+    });
+    modal.addEventListener('mousedown', function(e){
+      if (e.target === modal) closeModal();
+    });
+  </script>
+</body>
+</html>
